@@ -6,6 +6,8 @@
 ## 4 CPUs
 CPUs=4
 
+## Profiling option
+USE_NSYS=false
 ###########################################################
 
 
@@ -71,7 +73,16 @@ echo `date`
 echo starting run in current directory $PWD
 echo
 
-mpirun -np $numnodes $PWD/bin/xspecfem3D
+# profiling can be enabled or disabled setting variable at top of file
+# nvtx requires paranoid level <2 which is not set; will be added to trace automatically because of mpi
+
+if [ "$USE_NSYS" == true ]; then
+	echo profiling using Nsight Systems
+	nsys profile --trace=cuda,nvtx,osrt,mpi --cuda-memory-usage=true mpirun -np $numnodes $PWD/bin/xspecfem3D
+else
+	echo running without profiling
+	mpirun -np $numnodes $PWD/bin/xspecfem3D
+fi
 
 # checks exit code
 if [[ $? -ne 0 ]]; then exit 1; fi
