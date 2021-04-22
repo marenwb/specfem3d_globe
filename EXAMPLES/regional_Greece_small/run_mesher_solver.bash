@@ -8,6 +8,8 @@ CPUs=4
 
 ## Profiling option
 USE_NSYS=false
+USE_NCOMP=false
+USE_NVPROF=true
 ###########################################################
 
 
@@ -79,6 +81,12 @@ echo
 if [ "$USE_NSYS" == true ]; then
 	echo profiling using Nsight Systems
 	nsys profile --trace=cuda,nvtx,osrt,mpi --cuda-memory-usage=true mpirun -np $numnodes $PWD/bin/xspecfem3D
+elif [ "$USE_NCOMP" == true ]; then
+	echo profiling using Nsight Compute
+	sudo ncu --target-processes=all -f -o profile mpirun -np $numnodes $PWD/bin/xspecfem3D
+elif [ "$USE_NVPROF" == true ]; then
+	echo profiling using Nvprof
+	nvprof --profile-child-processes mpirun -np $numnodes $PWD/bin/xspecfem3D
 else
 	echo running without profiling
 	mpirun -np $numnodes $PWD/bin/xspecfem3D
