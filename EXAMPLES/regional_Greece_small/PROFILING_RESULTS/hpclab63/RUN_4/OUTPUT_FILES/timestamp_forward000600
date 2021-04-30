@@ -1,0 +1,20 @@
+ Time step #          600
+ Time:    1.19081330      minutes
+
+ Max norm displacement vector U in solid in all slices for forward prop. (m) =    1.14619751E-02
+ Max non-dimensional potential Ufluid in fluid in all slices for forward prop. =    0.00000000    
+
+ Elapsed time in seconds =    45.015122294999998     
+ Elapsed time in hh:mm:ss =      0 h 00 m 45 s
+ Mean elapsed time per time step in seconds =    7.5025203824999998E-002
+
+ Time steps done =          600  out of         1300
+ Time steps remaining =          700
+ Estimated remaining time in seconds =    52.517642677500000     
+ Estimated remaining time in hh:mm:ss =      0 h 00 m 52 s
+
+ Estimated total run time in seconds =    97.532764972499990     
+ Estimated total run time in hh:mm:ss =      0 h 01 m 37 s
+ We have done    46.1538467     % of that
+
+ The run will finish approximately on (in local time): Thu Apr 22, 2021 15:33
