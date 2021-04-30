@@ -23,7 +23,7 @@ arc/
 bin/
 obj/
 OUTPUT_FILES/*
-
+EXAMPLES/regional_Greece_small/PROFILING_RESULTS/*
 # Documentation
 doc/USER_MANUAL/figures/*-eps-converted-to.pdf
 
