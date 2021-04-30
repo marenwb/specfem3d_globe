@@ -107,7 +107,7 @@ GPU_ELEM_PER_THREAD := 1
 # default cuda libraries
 # runtime library -lcudart needed, others are optional -lcuda -lcublas
 
-CUDA_FLAGS = @CUDA_FLAGS@
+CUDA_FLAGS = @CUDA_FLAGS@ -lineinfo
 CUDA_INC = @CUDA_CPPFLAGS@
 CUDA_LINK = @CUDA_LDFLAGS@ @CUDA_LIBS@ -lstdc++
 CUDA_DEBUG = --cudart=shared
