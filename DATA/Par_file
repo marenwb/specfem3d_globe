@@ -25,8 +25,8 @@ NEX_XI                          = 64
 NEX_ETA                         = 64
 
 # number of MPI processors along the two sides of the first chunk
-NPROC_XI                        = 2
-NPROC_ETA                       = 2
+NPROC_XI                        = 1
+NPROC_ETA                       = 1
 
 #-----------------------------------------------------------
 #
@@ -57,7 +57,7 @@ NPROC_ETA                       = 2
 #                          associated reference model rather than the default 3D crustal model
 #                          e.g. s20rts_1Dcrust, s362ani_1Dcrust, etc.
 #
-MODEL                           = 1D_isotropic_prem
+MODEL                           = 1D_transversely_isotropic_prem
 
 # parameters describing the Earth model
 OCEANS                          = .true.
@@ -163,7 +163,7 @@ MOVIE_START                     = 0
 MOVIE_STOP                      = 40000
 
 # save mesh files to check the mesh
-SAVE_MESH_FILES                 = .false.
+SAVE_MESH_FILES                 = .true.
 
 # restart files (number of runs can be 1 or higher, choose 1 for no restart files)
 NUMBER_OF_RUNS                  = 1
@@ -175,7 +175,7 @@ LOCAL_PATH                      = ./DATABASES_MPI
 LOCAL_TMP_PATH                  = ./DATABASES_MPI
 
 # interval at which we output time step info and max of norm of displacement
-NTSTEP_BETWEEN_OUTPUT_INFO      = 500
+NTSTEP_BETWEEN_OUTPUT_INFO      = 200
 
 #-----------------------------------------------------------
 #
@@ -231,7 +231,7 @@ USE_BINARY_FOR_LARGE_FILE       = .false.
 RECEIVERS_CAN_BE_BURIED         = .true.
 
 # print source time function
-PRINT_SOURCE_TIME_FUNCTION      = .false.
+PRINT_SOURCE_TIME_FUNCTION      = .true.
 
 #-----------------------------------------------------------
 #

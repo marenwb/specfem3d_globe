@@ -8,7 +8,7 @@ CPUs=1
 
 ## Profiling option
 ## Note: NVPROF does not work with devices with compute capability 8.0 or higher 
-USE_NSYS=false
+USE_NSYS=true
 USE_NCOMP=true
 USE_NVPROF=false
 ###########################################################
@@ -81,10 +81,10 @@ echo
 
 if [ "$USE_NSYS" == true ]; then
 	echo profiling using Nsight Systems
-	nsys profile --trace=cuda,nvtx,osrt,mpi --cuda-memory-usage=true mpirun -np $numnodes $PWD/bin/xspecfem3D
+	nsys profile --trace=cuda,nvtx,osrt,mpi --backtrace=dwarf --cuda-memory-usage=true --sampling-period=1000000 mpirun -np $numnodes $PWD/bin/xspecfem3D
 elif [ "$USE_NCOMP" == true ]; then
 	echo profiling using Nsight Compute
-	sudo mpirun -np $numnodes --allow-run-as-root /usr/local/cuda-11.2/bin/ncu --target-processes all --kernel-id ::crust_mantle_impl_kernel_forward:1 --set full -f -o profile $PWD/bin/xspecfem3D
+	sudo mpirun -np $numnodes --allow-run-as-root /usr/local/cuda-11.2/bin/ncu --target-processes all --kernel-id ::regex:^.*forward:"1|100|200|400|800|1000" --set full -f -o profile $PWD/bin/xspecfem3D
 elif [ "$USE_NVPROF" == true ]; then
 	echo profiling using Nvprof
 	nvprof --profile-child-processes mpirun -np $numnodes $PWD/bin/xspecfem3D

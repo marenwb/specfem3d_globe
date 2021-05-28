@@ -22,4 +22,4 @@ else
 	rm -rf profile.ncu-rep
 fi
 
-echo results copied to specfem3d_globe/EXAMPLES/regional_Greece_small/PROFILING_RESULTS/$1/RUN_$2/
+echo results copied to $currentdir/PROFILING_RESULTS/$1/RUN_$2/
