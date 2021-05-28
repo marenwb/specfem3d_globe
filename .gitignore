@@ -24,6 +24,8 @@ bin/
 obj/
 OUTPUT_FILES/*
 EXAMPLES/regional_Greece_small/PROFILING_RESULTS/*
+EXAMPLES/regional_Greece_small/OUTPUT_FILES/*
+EXAMPLES/regional_Greece_small/DATABASES_MPI/*
 # Documentation
 doc/USER_MANUAL/figures/*-eps-converted-to.pdf
 
