@@ -706,8 +706,10 @@ COND_OCL_FALSE
 COND_OCL_TRUE
 COND_CUDA_PLUS_FALSE
 COND_CUDA_PLUS_TRUE
-COND_CUDA11_FALSE
-COND_CUDA11_TRUE
+COND_CUDA11-86_FALSE
+COND_CUDA11-86_TRUE
+COND_CUDA11_8_FALSE
+COND_CUDA11_8_TRUE
 COND_CUDA10_FALSE
 COND_CUDA10_TRUE
 COND_CUDA9_FALSE
@@ -2867,16 +2869,24 @@ else
   COND_CUDA10_FALSE=
 fi
 
- if test x"$want_cuda" = xcuda11; then
-  COND_CUDA11_TRUE=
-  COND_CUDA11_FALSE='#'
+ if test x"$want_cuda" = xcuda11_8; then
+  COND_CUDA11_8_TRUE=
+  COND_CUDA11_8_FALSE='#'
 else
-  COND_CUDA11_TRUE='#'
-  COND_CUDA11_FALSE=
+  COND_CUDA11_8_TRUE='#'
+  COND_CUDA11_8_FALSE=
+fi
+
+if test x"$want_cuda" = xcuda11_86; then
+ COND_CUDA11_86_TRUE=
+ COND_CUDA11_86_FALSE='#'
+else
+ COND_CUDA11_86_TRUE='#'
+ COND_CUDA11_86_FALSE=
 fi
 
 # cuda linking for cuda 5x and 6x
- if test "$want_cuda" = cuda5 -o "$want_cuda" = cuda6 -o "$want_cuda" = cuda7 -o "$want_cuda" = cuda8 -o "$want_cuda" = cuda9 -o "$want_cuda" = cuda10 -o "$want_cuda" = cuda11; then
+ if test "$want_cuda" = cuda5 -o "$want_cuda" = cuda6 -o "$want_cuda" = cuda7 -o "$want_cuda" = cuda8 -o "$want_cuda" = cuda9 -o "$want_cuda" = cuda10 -o "$want_cuda" = cuda11_8 -o "$want_cuda" = cuda11_86; then
   COND_CUDA_PLUS_TRUE=
   COND_CUDA_PLUS_FALSE='#'
 else
@@ -8184,8 +8194,12 @@ if test -z "${COND_CUDA10_TRUE}" && test -z "${COND_CUDA10_FALSE}"; then
   as_fn_error $? "conditional \"COND_CUDA10\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${COND_CUDA11_TRUE}" && test -z "${COND_CUDA11_FALSE}"; then
-  as_fn_error $? "conditional \"COND_CUDA11\" was never defined.
+if test -z "${COND_CUDA11_8_TRUE}" && test -z "${COND_CUDA11_8_FALSE}"; then
+  as_fn_error $? "conditional \"COND_CUDA11_8\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${COND_CUDA11_86_TRUE}" && test -z "${COND_CUDA11_86_FALSE}"; then
+  as_fn_error $? "conditional \"COND_CUDA11_86\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${COND_CUDA_PLUS_TRUE}" && test -z "${COND_CUDA_PLUS_FALSE}"; then
@@ -9499,4 +9513,3 @@ $as_echo "  DATA/CMTSOLUTION        Set the source parameters before running the
 $as_echo "  DATA/STATIONS           Set the receiver stations before running the solver." >&6; }
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: " >&5
 $as_echo "" >&6; }
-
