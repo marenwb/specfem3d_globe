@@ -28,6 +28,8 @@
 */
 
 #include "mesh_constants_gpu.h"
+#include <sys/time.h> //added for timing
+#include <stdio.h>
 
 #ifdef USE_CUDA
 #ifdef USE_TEXTURES_FIELDS
@@ -49,6 +51,12 @@ __constant__ size_t d_hprimewgll_xx_tex_offset;
 #endif
 
 /* ----------------------------------------------------------------------------------------------- */
+
+double cpuSecond() {
+	struct timeval tp;
+	gettimeofday(&tp,NULL);
+	return ((double)tp.tv_sec + (double)tp.tv_usec*1.e-6);
+}
 
 void crust_mantle (int nb_blocks_to_compute, Mesh *mp,
                    int iphase,
@@ -302,6 +310,9 @@ void crust_mantle (int nb_blocks_to_compute, Mesh *mp,
     // since forward and adjoint function calls are identical and only the passed arrays change
     crust_mantle_impl_kernel crust_mantle_kernel_p;
 
+    //added for timing
+    double iStart, iElaps;
+
     // selects function call
     if (FORWARD_OR_ADJOINT == 1) {
       // forward wavefields -> FORWARD_OR_ADJOINT == 1
@@ -312,6 +323,7 @@ void crust_mantle (int nb_blocks_to_compute, Mesh *mp,
       crust_mantle_kernel_p = &crust_mantle_impl_kernel_adjoint;
     }
 
+    iStart = cpuSecond();
     crust_mantle_kernel_p<<<grid,threads,0,mp->compute_stream>>>(nb_blocks_to_compute,
                                                                  d_ibool.cuda,
                                                                  d_ispec_is_tiso.cuda,
@@ -365,6 +377,9 @@ void crust_mantle (int nb_blocks_to_compute, Mesh *mp,
                                                                  mp->d_density_table.cuda,
                                                                  mp->d_wgll_cube.cuda,
                                                                  mp->NSPEC_CRUST_MANTLE_STRAIN_ONLY);
+  cudaDeviceSynchronize();
+  iElaps = cpuSecond() - iStart;
+  printf("Elapsed time crust_mantle_impl_forward_kernel: %f \n", iElaps);
   }
 #endif
 
